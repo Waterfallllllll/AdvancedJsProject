@@ -40,5 +40,4 @@ const modals = () => {
     // showModalByTime(60000, ".popup");
 };
 
-
 export default modals;

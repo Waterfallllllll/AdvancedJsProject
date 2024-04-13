@@ -8,3 +8,4 @@ window.addEventListener("DOMContentLoaded", () => {
     modals();
     tabs(".decoration_slider",".slick-slide", ".decoration_content", ".after_click");
 });
+
