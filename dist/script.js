@@ -69,16 +69,15 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
     tab = document.querySelectorAll(tabSelector),
     content = document.querySelectorAll(contentSelector),
     active = document.querySelector(activeClass);
-  function hideTabContent() {
-    content.forEach(item => {
-      item.style.display = "none";
+  header.addEventListener("click", e => {
+    e.preventDefault();
+    tab.forEach(item => {
+      item.classList.remove("after_click");
     });
-  }
-  function showTabContent(i) {
-    content[i].style.display = "block";
-  }
-  tab.forEach(item => {
-    item.classList.remove(activeClass);
+    console.log(e.target);
+    if (e.target.classList.contains("no_click")) {
+      e.target.classList.add("after_click");
+    }
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tabs);
@@ -14005,7 +14004,7 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".slick-slide", ".decoration_content", ".after_click");
+  (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content", ".after_click");
 });
 })();
 

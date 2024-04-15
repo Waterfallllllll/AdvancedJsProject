@@ -6,19 +6,18 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
 		content = document.querySelectorAll(contentSelector),
 		active = document.querySelector(activeClass);
 
-	function hideTabContent() {
-		content.forEach(item => {
-			item.style.display = "none";
+	header.addEventListener("click", (e) => {
+		e.preventDefault();
+		tab.forEach(item => {
+			item.classList.remove("after_click");
 		});
-	}
+		console.log(e.target);
 
-	function showTabContent(i) {
-		content[i].style.display = "block";
-	}
-	
-	tab.forEach(item => {
-		item.classList.remove(activeClass);
+		if (e.target.classList.contains("no_click")) {
+			e.target.classList.add("after_click");
+		}
+
 	});
 };
-
+	
 export default tabs;
