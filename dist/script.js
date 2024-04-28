@@ -12,8 +12,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-
-
 const forms = () => {
   const forms = document.querySelectorAll("form"),
     inputs = document.querySelectorAll("input");
@@ -22,6 +20,19 @@ const forms = () => {
     success: "Спасибо! Скоро мы с вами свяжемся",
     failure: "Что-то пошло не так..."
   };
+  const postData = async (url, data) => {
+    document.querySelector(".status").textContent = message.loading;
+    let res = await fetch(url, {
+      method: "POST",
+      body: data
+    });
+    return await res.text();
+  };
+  const clearInputs = () => {
+    inputs.forEach(item => {
+      item.value = "";
+    });
+  };
   forms.forEach(item => {
     item.addEventListener("submit", e => {
       e.preventDefault();
@@ -29,6 +40,17 @@ const forms = () => {
       statusMessage.classList.add("status");
       item.append(statusMessage);
       const formData = new FormData(item);
+      postData("assets/server.php", formData).then(res => {
+        console.log(res);
+        statusMessage.textContent = message.success;
+      }).catch(() => {
+        statusMessage.textContent = message.failure;
+      }).finally(() => {
+        clearInputs();
+        setTimeout(() => {
+          statusMessage.remove();
+        }, 5000);
+      });
     });
   });
 };
@@ -47,8 +69,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-
-
 const modals = () => {
   function bindModal(openSelector, modalSelector, closeSelector) {
     const open = document.querySelectorAll(openSelector),
@@ -97,8 +117,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-
-
 const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
   const header = document.querySelector(headerSelector),
     tab = document.querySelectorAll(tabSelector),
@@ -14050,9 +14068,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 window.addEventListener("DOMContentLoaded", () => {
+  "use strict";
+
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".glazing_slider", ".glazing_block", ".glazing_content");

@@ -1,5 +1,3 @@
-"use strict";
-
 const modals = () => {
 
 	function bindModal(openSelector, modalSelector, closeSelector) {
