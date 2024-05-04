@@ -35,6 +35,7 @@ const modals = () => {
     
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
+	bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
 	// showModalByTime(60000, ".popup");
 };
 
