@@ -1,50 +1,49 @@
 import checkNumInputs from "./checkNumInputs";
 
 const changeModalState = (state) => {
-	const windowForm = document.querySelectorAll(".balcon_icons_img"),
-		windowWidth = document.querySelectorAll("#width"),
-		windowHeight = document.querySelectorAll("#height"),
-		windowType = document.querySelectorAll("#view_type"),
-		windowProfile = document.querySelectorAll(".checkbox");
-	
-	checkNumInputs("#height");
 	checkNumInputs("#width");
+	checkNumInputs("#height");
+
+	const windowType = document.querySelectorAll(".balcon_icons_img"),
+		widthType = document.querySelectorAll("#width"),
+		heightType = document.querySelectorAll("#height"),
+		valueType = document.querySelectorAll("#view_type"),
+		checkboxType = document.querySelectorAll(".checkbox");
 	
-	function bindActionToElems(event, elem, prop) {
+	function bindActionToElems(elem, event, name) {
 		elem.forEach((item, i) => {
 			item.addEventListener(event, () => {
 				switch (item.nodeName) {
 				case "SPAN":
-					state[prop] = i;
+					state[name] = i;
 					break;
 				case "INPUT":
-					if (item.getAttribute("type") === "checkbox") {
-						i == 0 ? state[prop] = "Холодное" : state[prop] = "Теплое";
+					if (item.getAttribute("type") == "checkbox") {
 						elem.forEach((box, j) => {
 							box.checked = false;
 							if (i == j) {
 								box.checked = true;
+								i == 0 ? state[name] = "Холодное" : state[name] = "Теплое";
 							}
 						});
 					} else {
-						state[prop] = item.value;
+						state[name] = item.value;
 					}
 					break;
 				case "SELECT":
-					state[prop] = item.value;
+					state[name] = item.value;
 					break;
 				}
-
 				console.log(state);
 			});
 		});
 	}
 
-	bindActionToElems("click", windowForm, "form");
-	bindActionToElems("input", windowWidth, "width");
-	bindActionToElems("input", windowHeight, "height");
-	bindActionToElems("change", windowType, "type");
-	bindActionToElems("change", windowProfile, "profile");
+	bindActionToElems(windowType, "click", "window");
+	bindActionToElems(widthType, "input", "width");
+	bindActionToElems(heightType, "input", "height");
+	bindActionToElems(valueType, "change", "value");
+	bindActionToElems(checkboxType, "change", "checkbox");
 };
 
-export default changeModalState;
+export default changeModalState;	
