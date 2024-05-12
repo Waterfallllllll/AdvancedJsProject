@@ -7,11 +7,20 @@ const modals = () => {
 			windows = document.querySelectorAll("[data-modal]");
 
 		open.forEach(item => {
-			item.addEventListener("click", () => {
-				closeAllModals();
-				modal.style.display = "block";
-				document.body.classList.add("modal-open");
-			});
+			function checkValue(value) {
+				if (value == 3) {
+					item.addEventListener("click", () => {
+						closeAllModals();
+						modal.style.display = "block";
+						document.body.classList.add("modal-open");
+					});
+				} else {
+					const elem = document.createElement("div");
+					elem.classList.add("status");
+					modal.append(elem);
+					elem.textContent = "Выберите рамку и введите значения высоты и ширины";
+				}
+			} 
 		});
 
 		close.addEventListener("click", () => {
