@@ -56,6 +56,11 @@ const forms = (state) => {
 						block.remove();
 					}, 5000);
 				});
+			
+			if (item.getAttribute("data-calc") == "end") {
+				document.querySelector(".popup_calc_end").style.display = "none";
+				document.body.classList.remove("modal-open");
+			}
 		});
 	});
 };

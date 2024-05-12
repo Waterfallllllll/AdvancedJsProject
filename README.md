@@ -4,6 +4,7 @@ This project was created for personal practice in utilizing JavaScript and vario
 1. Modal windows
 2. tabs
 3. forms
+4. Work with the server
 ## Technologies
 
 #### Web-Pack
