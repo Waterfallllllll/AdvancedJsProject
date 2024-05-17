@@ -3,21 +3,20 @@ import checkNumInputs from "./checkNumInputs";
 const changeModalState = (state) => {
 	checkNumInputs("#width");
 	checkNumInputs("#height");
-	let check = 0;
-
 	const windowType = document.querySelectorAll(".balcon_icons_img"),
 		widthType = document.querySelectorAll("#width"),
 		heightType = document.querySelectorAll("#height"),
 		valueType = document.querySelectorAll("#view_type"),
-		checkboxType = document.querySelectorAll(".checkbox");
+		checkboxType = document.querySelectorAll(".checkbox"),
+		window = document.querySelector(".popup_calc_content");
 	
+
 	function bindActionToElems(elem, event, name) {
 		elem.forEach((item, i) => {
 			item.addEventListener(event, () => {
 				switch (item.nodeName) {
 				case "SPAN":
 					state[name] = i;
-					check++;
 					break;
 				case "INPUT":
 					if (item.getAttribute("type") == "checkbox") {
@@ -30,7 +29,6 @@ const changeModalState = (state) => {
 						});
 					} else {
 						state[name] = item.value;
-						check++;
 					}
 					break;
 				case "SELECT":
@@ -38,9 +36,9 @@ const changeModalState = (state) => {
 					break;
 				}
 				console.log(state);
+
 			});
 		});
-		checkValue(check);
 	}
 
 	bindActionToElems(windowType, "click", "window");

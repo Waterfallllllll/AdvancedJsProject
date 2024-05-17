@@ -1,27 +1,42 @@
-const modals = () => {
+import changeModalState from "./changeModalState";
 
+const modals = (state) => {
+
+	console.log(state);
 	function bindModal(openSelector, modalSelector, closeSelector, closeClickOverlay = true) {
 		const open = document.querySelectorAll(openSelector),
 			modal = document.querySelector(modalSelector),
 			close = document.querySelector(closeSelector),
 			windows = document.querySelectorAll("[data-modal]");
+		
+		const handleClick = (item) => {
+			closeAllModals();
+			modal.style.display = "block";
+			document.body.classList.add("modal-open");
+		};
 
 		open.forEach(item => {
-			function checkValue(value) {
-				if (value == 3) {
-					item.addEventListener("click", () => {
-						closeAllModals();
-						modal.style.display = "block";
-						document.body.classList.add("modal-open");
-					});
-				} else {
-					const elem = document.createElement("div");
-					elem.classList.add("status");
-					modal.append(elem);
-					elem.textContent = "Выберите рамку и введите значения высоты и ширины";
-				}
-			} 
+			item.addEventListener("click", () => handleClick(item));
 		});
+
+		const handleClickCalc = () => {
+			closeAllModals();
+			modal.style.display = "block";
+			document.body.classList.add("modal-open");
+		};
+
+		document.querySelectorAll(".balcon_icons_img").forEach(item => {
+			item.addEventListener("click", () => {
+				document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
+			});
+		});
+		
+		if ("window" in state) {
+			
+		} else {
+			console.log("aa");
+			document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+		}
 
 		close.addEventListener("click", () => {
 			closeAllModals();
@@ -40,6 +55,7 @@ const modals = () => {
 				item.style.display = "none";
 			});
 		}
+
 	}
 
 	function showModalByTime(time, selector) {
@@ -53,7 +69,7 @@ const modals = () => {
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
 	bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
-	bindModal(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
+	// bindModal(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
 	bindModal(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
 	// showModalByTime(60000, ".popup");
 };
