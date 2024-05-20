@@ -24,19 +24,31 @@ const modals = (state) => {
 			modal.style.display = "block";
 			document.body.classList.add("modal-open");
 		};
+		
+		function universallyAttachEventHandler() {
+			document.querySelectorAll(".balcon_icons_img").forEach(item => {
+				item.addEventListener("click", () => {
+					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
+				});
+			});
 
-		document.querySelectorAll(".balcon_icons_img").forEach(item => {
-			item.addEventListener("click", () => {
+			document.querySelector("#height").addEventListener("input", () => {
 				document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 			});
-		});
-		
-		if ("window" in state) {
+
+			document.querySelector("#width").addEventListener("input", () => {
+				document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
+
+				if (("width" == /^.+$/ in state) && ("window" in state) && ("height" in state)) {
 			
-		} else {
-			console.log("aa");
-			document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+				} else {
+					console.log("a");
+					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+				}
+			});
 		}
+
+		universallyAttachEventHandler();
 
 		close.addEventListener("click", () => {
 			closeAllModals();
