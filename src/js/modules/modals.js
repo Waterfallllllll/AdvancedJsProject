@@ -21,26 +21,31 @@ const modals = (state) => {
 
 		const handleClickCalc = () => {
 			closeAllModals();
-			modal.style.display = "block";
+			document.querySelector(".popup_calc_profile").style.display = "block";
 			document.body.classList.add("modal-open");
 		};
 		
+		
 		function universallyAttachEventHandler() {
+			const reg = /^$/;
 			document.querySelectorAll(".balcon_icons_img").forEach(item => {
 				item.addEventListener("click", () => {
-					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
+					if ((state.height.search(reg)) && (state.width.search(reg))) document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				});
 			});
 
 			document.querySelector("#height").addEventListener("input", () => {
-				document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
+				if ((state.height.search(reg)) && (state.width.search(reg)) && ("window" in state)) {
+					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
+				} else {
+					console.log("a");
+					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+				}
 			});
-
+					
 			document.querySelector("#width").addEventListener("input", () => {
-				document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
-
-				if (("width" == /^.+$/ in state) && ("window" in state) && ("height" in state)) {
-			
+				if ((state.width.search(reg)) && (state.height.search(reg)) && ("window" in state)) {
+					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
 					console.log("a");
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
@@ -52,6 +57,7 @@ const modals = (state) => {
 
 		close.addEventListener("click", () => {
 			closeAllModals();
+			state = {};
 			document.body.classList.remove("modal-open");
 		});
 
@@ -77,6 +83,8 @@ const modals = (state) => {
 			document.body.classList.add("modal-open");
 		}, time);
 	}
+
+	
     
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
