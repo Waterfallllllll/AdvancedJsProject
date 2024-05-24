@@ -26,7 +26,7 @@ const modals = (state) => {
 		};
 		
 		
-		function universallyAttachEventHandler() {
+		function universallyAttachFirstForm() {
 			const reg = /^$/;
 			document.querySelectorAll(".balcon_icons_img").forEach(item => {
 				item.addEventListener("click", () => {
@@ -53,7 +53,13 @@ const modals = (state) => {
 			});
 		}
 
-		universallyAttachEventHandler();
+		universallyAttachFirstForm();
+
+		const handleClickSecondForm = () => {
+			closeAllModals();
+			document.querySelector(".popup_calc_end").style.display = "block";
+			document.body.classList.add("modal-open");
+		};
 
 		close.addEventListener("click", () => {
 			closeAllModals();
@@ -84,13 +90,24 @@ const modals = (state) => {
 		}, time);
 	}
 
-	
+	function universallyAttachSecondForm() {
+		document.querySelectorAll("#view_type").forEach(item => {
+			console.log(item);
+			item.addEventListener("change", () => {
+				if ("value" in state) {
+					document.querySelector(".button .popup_calc_profile_button").addEventListener("click", handleClickSecondForm);
+				} 
+			});
+		});
+	}
+
+	universallyAttachSecondForm();
     
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
 	bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
 	// bindModal(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
-	bindModal(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
+	// bindModal(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
 	// showModalByTime(60000, ".popup");
 };
 
