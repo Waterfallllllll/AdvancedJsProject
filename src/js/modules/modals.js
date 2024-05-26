@@ -61,6 +61,20 @@ const modals = (state) => {
 			document.body.classList.add("modal-open");
 		};
 
+		function universallyAttachSecondForm() {
+			const viewType = document.querySelector("#view_type");
+			const buttonCalc = document.querySelector(".popup_calc_profile_button");
+
+			viewType.addEventListener("change", () => {
+				if ("value" in state) {
+					buttonCalc.addEventListener("click", handleClickSecondForm);
+					console.log("aa");
+				} 
+			});
+		}
+
+		universallyAttachSecondForm();
+
 		close.addEventListener("click", () => {
 			closeAllModals();
 			state = {};
@@ -89,19 +103,6 @@ const modals = (state) => {
 			document.body.classList.add("modal-open");
 		}, time);
 	}
-
-	function universallyAttachSecondForm() {
-		document.querySelectorAll("#view_type").forEach(item => {
-			console.log(item);
-			item.addEventListener("change", () => {
-				if ("value" in state) {
-					document.querySelector(".button .popup_calc_profile_button").addEventListener("click", handleClickSecondForm);
-				} 
-			});
-		});
-	}
-
-	universallyAttachSecondForm();
     
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
