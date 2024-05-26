@@ -64,16 +64,38 @@ const modals = (state) => {
 		function universallyAttachSecondForm() {
 			const viewType = document.querySelector("#view_type");
 			const buttonCalc = document.querySelector(".popup_calc_profile_button");
+			const checkBox = document.querySelectorAll(".checkbox");
 
 			viewType.addEventListener("change", () => {
-				if ("value" in state) {
+				if (("value" in state) && ("checkbox" in state)) {
 					buttonCalc.addEventListener("click", handleClickSecondForm);
 					console.log("aa");
 				} 
 			});
+
+			checkBox.forEach(item => {
+				item.addEventListener("change", () => {
+					if (("value" in state) && ("checkbox" in state)) {
+						buttonCalc.addEventListener("click", handleClickSecondForm);
+						console.log("aa");
+					}
+				});
+			});
 		}
 
 		universallyAttachSecondForm();
+
+		const clearObject = () => {
+			const calcBtn = document.querySelectorAll(".popup_calc_btn");
+
+			calcBtn.forEach(item => {
+				item.addEventListener("click", () => {
+					state = {};
+					console.log("clear");
+					console.log(state);
+				});
+			});
+		};
 
 		close.addEventListener("click", () => {
 			closeAllModals();
@@ -104,6 +126,11 @@ const modals = (state) => {
 		}, time);
 	}
     
+	
+	dataClear = document.querySelector("[data-clear]");
+	console.log(dataClear);
+
+
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
 	bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");

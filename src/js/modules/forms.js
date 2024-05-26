@@ -48,6 +48,7 @@ const forms = (state) => {
 				.then(res => {
 					console.log(res);
 					block.textContent = message.success;
+					
 				}).catch(() => {
 					block.textContent = message.failure;
 				}).finally(() => {
@@ -61,8 +62,6 @@ const forms = (state) => {
 				console.log(state);
 				document.querySelector(".popup_calc_end").style.display = "none";
 				document.body.classList.remove("modal-open");
-				state = {};
-				console.log(state);
 			}
 		});
 	});
