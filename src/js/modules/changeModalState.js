@@ -11,7 +11,7 @@ const changeModalState = (state) => {
 		window = document.querySelector(".popup_calc_content");
 	
 
-	function bindActionToElems(elem, event, name) {
+	function bindActionToElems(elem, event, name) {	
 		elem.forEach((item, i) => {
 			item.addEventListener(event, () => {
 				switch (item.nodeName) {
@@ -25,10 +25,12 @@ const changeModalState = (state) => {
 							if (i == j) {
 								box.checked = true;
 								i == 0 ? state[name] = "Холодное" : state[name] = "Теплое";
+								state.value = "tree";
 							}
 						});
 					} else {
 						state[name] = item.value;
+						state.window = 0;
 					}
 					break;
 				case "SELECT":

@@ -48,7 +48,6 @@ const forms = (state) => {
 				.then(res => {
 					console.log(res);
 					block.textContent = message.success;
-					
 				}).catch(() => {
 					block.textContent = message.failure;
 				}).finally(() => {

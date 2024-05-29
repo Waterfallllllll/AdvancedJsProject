@@ -2,7 +2,6 @@ import changeModalState from "./changeModalState";
 
 const modals = (state) => {
 
-	console.log(state);
 	function bindModal(openSelector, modalSelector, closeSelector, closeClickOverlay = true) {
 		const open = document.querySelectorAll(openSelector),
 			modal = document.querySelector(modalSelector),
@@ -25,7 +24,6 @@ const modals = (state) => {
 			document.body.classList.add("modal-open");
 		};
 		
-		
 		function universallyAttachFirstForm() {
 			const reg = /^$/;
 			document.querySelectorAll(".balcon_icons_img").forEach(item => {
@@ -38,7 +36,6 @@ const modals = (state) => {
 				if ((state.height.search(reg)) && (state.width.search(reg)) && ("window" in state)) {
 					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
-					console.log("a");
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
 				}
 			});
@@ -47,7 +44,6 @@ const modals = (state) => {
 				if ((state.width.search(reg)) && (state.height.search(reg)) && ("window" in state)) {
 					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
-					console.log("a");
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
 				}
 			});
@@ -86,16 +82,28 @@ const modals = (state) => {
 		universallyAttachSecondForm();
 
 		const clearObject = () => {
-			const calcBtn = document.querySelectorAll(".popup_calc_btn");
+			const data = document.querySelectorAll(".popup_calc_btn"),
+				checkbox = document.querySelectorAll(".checkbox");
 
-			calcBtn.forEach(item => {
+			data.forEach(item => {
 				item.addEventListener("click", () => {
-					state = {};
-					console.log("clear");
-					console.log(state);
+					
+					for (const key in state) {
+						if (state.hasOwnProperty(key)) {
+							delete state[key];
+						}
+					}
+				
+					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+					document.querySelector(".popup_calc_profile_button").removeEventListener("click", handleClickSecondForm);
+					checkbox.forEach(item => {
+						item.checked = false;
+					});
 				});
 			});
 		};
+
+		clearObject();
 
 		close.addEventListener("click", () => {
 			closeAllModals();
@@ -126,11 +134,6 @@ const modals = (state) => {
 		}, time);
 	}
     
-	
-	dataClear = document.querySelector("[data-clear]");
-	console.log(dataClear);
-
-
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
 	bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
