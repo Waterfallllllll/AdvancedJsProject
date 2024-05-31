@@ -15,8 +15,27 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass, display
 
 	function showTabContent(i = 0) {
 		content[i].style.display = display;
-
 		tab[i].classList.add(activeClass);
+
+		
+		const clearObject = () => {
+			const data = document.querySelectorAll(".popup_calc_btn");
+
+
+			data.forEach(item => {
+				item.addEventListener("click", () => {
+					if ("window" in state) {
+						const balcon = document.querySelectorAll(".balcon_icons_img");
+
+						balcon.forEach(item => {
+							item.classList.remove("do_image_more");
+						});
+					}
+				});
+			});
+		};
+
+		clearObject();
 	}
 
 	hideTabContent();	

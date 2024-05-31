@@ -25,12 +25,21 @@ const changeModalState = (state) => {
 							if (i == j) {
 								box.checked = true;
 								i == 0 ? state[name] = "Холодное" : state[name] = "Теплое";
-								state.value = "tree";
+								if ("value" in state) {
+
+								} else {
+									state.value = "tree";
+								}
 							}
 						});
 					} else {
 						state[name] = item.value;
-						state.window = 0;
+
+						if ("window" in state) {
+
+						} else {
+							state.window = 0;
+						}
 					}
 					break;
 				case "SELECT":

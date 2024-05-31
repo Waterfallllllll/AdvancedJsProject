@@ -111,11 +111,10 @@ const modals = (state) => {
 					checkbox.forEach(item => {
 						item.checked = false;
 					});
+
+					clearInputs();
 				});
 			});
-
-			clearInputs();
-
 		};
 
 		clearObject();
@@ -151,11 +150,6 @@ const modals = (state) => {
 		}, time);
 	}
 
-	const element = document.querySelectorAll(".balcon_icons_img");
-
-	for (const className of element.classList) {
-		console.log(className); 
-	}
     
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
