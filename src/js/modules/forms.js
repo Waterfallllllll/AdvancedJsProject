@@ -58,7 +58,6 @@ const forms = (state) => {
 				});
 			
 			if (item.getAttribute("data-calc") == "end") {
-				console.log(state);
 				document.querySelector(".popup_calc_end").style.display = "none";
 				document.body.classList.remove("modal-open");
 			}

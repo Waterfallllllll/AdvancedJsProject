@@ -22,6 +22,18 @@ const modals = (state) => {
 			closeAllModals();
 			document.querySelector(".popup_calc_profile").style.display = "block";
 			document.body.classList.add("modal-open");
+
+			document.querySelector(".popup_calc_profile_close").addEventListener("click", () => {
+				closeAllModals();
+				document.body.classList.remove("modal-open");
+				clearObject();
+			});
+
+			document.querySelector(".popup_calc_end_close").addEventListener("click", () => {
+				closeAllModals();
+				document.body.classList.remove("modal-open");
+				clearObject();
+			});
 		};
 		
 		function universallyAttachFirstForm() {
@@ -101,15 +113,20 @@ const modals = (state) => {
 					});
 				});
 			});
+
+			clearInputs();
+
 		};
 
 		clearObject();
 
-		close.addEventListener("click", () => {
-			closeAllModals();
-			state = {};
-			document.body.classList.remove("modal-open");
-		});
+		function clearInputs() {
+			const inputs = document.querySelectorAll("input");
+
+			inputs.forEach(item => {
+				item.value = "";
+			});
+		}
 
 		modal.addEventListener("click", (e) => {
 			if (e.target == modal && closeClickOverlay == true) {
@@ -132,6 +149,12 @@ const modals = (state) => {
 			modal.style.display = "block";
 			document.body.classList.add("modal-open");
 		}, time);
+	}
+
+	const element = document.querySelectorAll(".balcon_icons_img");
+
+	for (const className of element.classList) {
+		console.log(className); 
 	}
     
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
