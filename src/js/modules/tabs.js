@@ -24,13 +24,13 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass, display
 
 			data.forEach(item => {
 				item.addEventListener("click", () => {
-					if ("window" in state) {
-						const balcon = document.querySelectorAll(".balcon_icons_img");
+					const balcon = document.querySelectorAll(".balcon_icons_img");
 
-						balcon.forEach(item => {
-							item.classList.remove("do_image_more");
-						});
-					}
+					balcon.forEach(item => {
+						item.classList.remove("do_image_more");
+					});
+
+					tab[0].classList.add(activeClass);
 				});
 			});
 		};

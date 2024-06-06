@@ -44,6 +44,18 @@ const changeModalState = (state) => {
 					break;
 				case "SELECT":
 					state[name] = item.value;
+						
+					const clearObject = () => {
+						const data = document.querySelectorAll(".popup_calc_btn");
+
+						data.forEach(item => {
+							item.addEventListener("click", () => {
+								document.querySelector("#view_type").value = "tree";
+							});
+						});
+					};
+
+					clearObject();
 					break;
 				}
 				console.log(state);
