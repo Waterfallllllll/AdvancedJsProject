@@ -37,7 +37,7 @@ const modals = (state) => {
 		};
 		
 		function universallyAttachFirstForm() {
-			const reg = /^$/;
+			const reg = /^$/g;
 			document.querySelectorAll(".balcon_icons_img").forEach(item => {
 				item.addEventListener("click", () => {
 					if ((state.height.search(reg)) && (state.width.search(reg))) document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
@@ -49,6 +49,7 @@ const modals = (state) => {
 					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+					document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
 				}
 			});
 					
@@ -57,6 +58,7 @@ const modals = (state) => {
 					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
+					document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
 				}
 			});
 		}
@@ -114,6 +116,11 @@ const modals = (state) => {
 
 					clearInputs();
 
+					if (("width" in state) && ("height" in state) && ("window" in state)) {
+						document.querySelector(".popup_calc_button").removeEventListener("click", addAlert);			
+					} else {
+						document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
+					}
 				});
 			});
 		};
@@ -161,15 +168,17 @@ const modals = (state) => {
 		alert.classList.add("status");
 		alert.textContent = "Заполните все поля";
 		document.querySelector(".popup_calc_content").append(alert);
-	}
-					
-	if (("width" in state) && ("height" in state) && ("window" in state)) {
-		document.querySelector(".popup_calc_button").removeEventListener("click", addAlert);			
-	} else {
-		document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
-	}
+		document.querySelector(".popup_calc_button").removeEventListener("click", addAlert);		
 
-    
+		let count = 0;
+		count++;
+		if (count > 0) {
+			setTimeout(() => {
+				alert.style.display = "none";
+			}, 1000);
+		}
+	}
+					    
 	bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModal(".phone_link", ".popup", ".popup .popup_close");
 	bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
