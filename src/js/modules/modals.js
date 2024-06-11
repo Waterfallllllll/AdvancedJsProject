@@ -49,7 +49,6 @@ const modals = (state) => {
 					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
-					document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
 				}
 			});
 					
@@ -58,7 +57,6 @@ const modals = (state) => {
 					document.querySelector(".popup_calc_button").addEventListener("click", handleClickCalc);
 				} else {
 					document.querySelector(".popup_calc_button").removeEventListener("click", handleClickCalc);
-					document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
 				}
 			});
 		}
@@ -121,6 +119,12 @@ const modals = (state) => {
 					} else {
 						document.querySelector(".popup_calc_button").addEventListener("click", addAlert);
 					}
+
+					if ("checkbox" in state) {
+						
+					} else {
+						document.querySelector(".popup_calc_profile_button").addEventListener("click", addSecondAlert);
+					}
 				});
 			});
 		};
@@ -175,7 +179,23 @@ const modals = (state) => {
 		if (count > 0) {
 			setTimeout(() => {
 				alert.style.display = "none";
-			}, 1000);
+			}, 3000);
+		}
+	}
+
+	function addSecondAlert() {
+		const alert = document.createElement("div");
+		alert.classList.add("status");
+		alert.textContent = "Заполните все поля";
+		document.querySelector(".popup_calc_profile_content").append(alert);
+		document.querySelector(".popup_calc_profile_button").removeEventListener("click", addAlert);		
+
+		let count = 0;
+		count++;
+		if (count > 0) {
+			setTimeout(() => {
+				alert.style.display = "none";
+			}, 3000);
 		}
 	}
 					    
