@@ -10,10 +10,10 @@ const timer = (id, deadline) => {
 	const getTimeRemaining = (endtime) => {
 		const t = Date.parse(endtime) - Date.parse(new Date()),
 			seconds = Math.floor((t/1000) % 60),
-			minutes = Math.floor((t/1000/60) % 60),
-			hours = Math.floor((t/(1000 * 60 * 60)) % 24),
-			days = Math.floor((t/(1000 * 60 * 60 * 24)));
-
+			minutes = Math.floor((t/(1000*60)) % 60),
+			hours = Math.floor((t/(1000 * 60 * 60)) % 24), // t - это количество миллисекунд.(1000 * 60 * 60) - это количество миллисекунд в одном часе (1000 миллисекунд = 1 секунда, 60 секунд = 1 минута, 60 минут = 1 час).
+			days = Math.floor((t / (1000 * 60 * 60 * 24)));
+		
 		return {
 			"total": t,
 			"days": days,
@@ -56,3 +56,4 @@ const timer = (id, deadline) => {
 };
 
 export default timer;
+
