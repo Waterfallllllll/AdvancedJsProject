@@ -426,7 +426,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const timer = (id, deadline) => {
   const addZero = num => {
-    if (num <= 9) {
+    if (num < 9) {
       return "0" + num;
     } else {
       return num;
@@ -435,38 +435,37 @@ const timer = (id, deadline) => {
   const getTimeRemaining = endtime => {
     const t = Date.parse(endtime) - Date.parse(new Date()),
       seconds = Math.floor(t / 1000 % 60),
-      minutes = Math.floor(t / (1000 * 60) % 60),
-      hours = Math.floor(t / (1000 * 60 * 60) % 24),
-      // t - это количество миллисекунд.(1000 * 60 * 60) - это количество миллисекунд в одном часе (1000 миллисекунд = 1 секунда, 60 секунд = 1 минута, 60 минут = 1 час).
-      days = Math.floor(t / (1000 * 60 * 60 * 24));
+      minutes = Math.floor(t / 1000 / 60 % 60),
+      hours = Math.floor(t / 1000 / 60 / 60 % 24),
+      days = Math.floor(t / 1000 / 60 / 60 / 24);
     return {
       "total": t,
-      "days": days,
-      "hours": hours,
+      "seconds": seconds,
       "minutes": minutes,
-      "seconds": seconds
+      "hours": hours,
+      "days": days
     };
   };
   const setClock = (selector, endtime) => {
     const timer = document.querySelector(selector),
-      days = timer.querySelector("#days"),
-      hours = timer.querySelector("#hours"),
-      minutes = timer.querySelector("#minutes"),
       seconds = timer.querySelector("#seconds"),
-      timeInterval = setInterval(updateClock, 1000);
+      minutes = timer.querySelector("#minutes"),
+      hours = timer.querySelector("#hours"),
+      days = timer.querySelector("#days"),
+      interval = setInterval(updateClock, 1000);
     updateClock();
     function updateClock() {
       const t = getTimeRemaining(endtime);
-      days.textContent = addZero(t.days);
-      hours.textContent = addZero(t.hours);
-      minutes.textContent = addZero(t.minutes);
       seconds.textContent = addZero(t.seconds);
+      minutes.textContent = addZero(t.minutes);
+      hours.textContent = addZero(t.hours);
+      days.textContent = addZero(t.days);
       if (t.total <= 0) {
-        days.textContent = "00";
-        hours.textContent = "00";
-        minutes.textContent = "00";
         seconds.textContent = "00";
-        clearInterval(timeInterval);
+        minutes.textContent = "00";
+        hours.textContent = "00";
+        days.textContent = "00";
+        clearInterval(interval);
       }
     }
   };
@@ -14402,7 +14401,7 @@ window.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
   const modalState = {};
-  const deadline = "2025-02-01";
+  const deadline = "2024-06-23";
   (0,_modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])(modalState);
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
