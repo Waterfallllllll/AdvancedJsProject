@@ -181,14 +181,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const images = () => {
   const block = document.createElement("div"),
-    initial = document.querySelector(".works");
+    initial = document.querySelector(".works"),
+    img = document.createElement("img");
   initial.addEventListener("click", e => {
     e.preventDefault();
     if (e.target.classList.contains("preview")) {
-      console.log("a");
+      const bigImg = e.target.parentNode.getAttribute("href");
+      img.setAttribute("src", bigImg);
+      block.appendChild(img);
       block.classList.add("popup");
-      block.style.display = "block";
+      block.style.display = "flex";
+      block.style.justifyContent = "center";
+      block.style.alignItems = "center";
       initial.appendChild(block);
+      document.body.style.overflow = "hidden";
+    } else if (e.target.classList.contains("popup")) {
+      block.style.display = "none";
+      document.body.style.overflow = "";
     }
   });
 };
