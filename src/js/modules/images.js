@@ -9,6 +9,7 @@ const images = () => {
 		if (e.target.classList.contains("preview")) {
 			const bigImg = e.target.parentNode.getAttribute("href");
 			img.setAttribute("src", bigImg);
+			img.style.cssText = "width: 25%;height: 50%;";
 			block.appendChild(img);
 			block.classList.add("popup");
 			block.style.display = "flex";

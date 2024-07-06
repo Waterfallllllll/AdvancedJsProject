@@ -188,6 +188,7 @@ const images = () => {
     if (e.target.classList.contains("preview")) {
       const bigImg = e.target.parentNode.getAttribute("href");
       img.setAttribute("src", bigImg);
+      img.style.cssText = "width: 25%;height: 50%;";
       block.appendChild(img);
       block.classList.add("popup");
       block.style.display = "flex";
@@ -224,11 +225,13 @@ const modals = state => {
     const open = document.querySelectorAll(openSelector),
       modal = document.querySelector(modalSelector),
       close = document.querySelector(closeSelector),
-      windows = document.querySelectorAll("[data-modal]");
+      windows = document.querySelectorAll("[data-modal]"),
+      scroll = calcScroll();
     const handleClick = item => {
       closeAllModals();
       modal.style.display = "block";
       document.body.classList.add("modal-open");
+      document.body.style.marginRight = `${scroll}px`;
     };
     open.forEach(item => {
       item.addEventListener("click", () => handleClick(item));
@@ -241,11 +244,13 @@ const modals = state => {
         closeAllModals();
         document.body.classList.remove("modal-open");
         clearObject();
+        document.body.style.marginRight = "0px";
       });
       document.querySelector(".popup_calc_end_close").addEventListener("click", () => {
         closeAllModals();
         document.body.classList.remove("modal-open");
         clearObject();
+        document.body.style.marginRight = "0px";
       });
     };
     function universallyAttachFirstForm() {
@@ -334,12 +339,14 @@ const modals = state => {
       if (e.target == modal && closeClickOverlay == true) {
         closeAllModals();
         document.body.classList.remove("modal-open");
+        document.body.style.marginRight = "0px";
       }
     });
     close.addEventListener("click", () => {
       closeAllModals();
       document.body.classList.remove("modal-open");
       clearObject();
+      document.body.style.marginRight = "0px";
     });
     function closeAllModals() {
       windows.forEach(item => {
@@ -381,6 +388,21 @@ const modals = state => {
         alert.style.display = "none";
       }, 3000);
     }
+  }
+  function calcScroll() {
+    const div = document.createElement("div");
+    div.style.height = "50px";
+    div.style.width = "50px";
+    div.style.overflowY = "scroll";
+    div.style.visibility = "hidden";
+    document.body.appendChild(div);
+    const scrollWidth = div.offsetWidth - div.clientWidth;
+    // Тут фишка в том, что мы берём всю ширину элемента включая саму прокрутку, и затем вычитаем ширину элемента без прокрутки. Таким образом, мы получаем ширину прокрутки. А нам имеено она и нужна.
+    div.remove();
+
+    // Урок 10
+
+    return scrollWidth;
   }
   bindModal(".header_btn", ".popup_engineer", ".popup_engineer .popup_close");
   bindModal(".phone_link", ".popup", ".popup .popup_close");
