@@ -11,7 +11,7 @@ This project was created for personal practice in utilizing JavaScript and vario
 
 #### Gulp
 
-The Galp makes our work comfortable. In this case, I configured it to the webpack functionality, as well as to update the page when changing any file and used babel to work with older versions of the browser.
+The Gulp makes our work comfortable. In this case, I configured it to the webpack functionality, as well as to update the page when changing any file and used babel to work with older versions of the browser.
 
 #### Eslint
 
@@ -21,7 +21,7 @@ Eslint allows you to edit js code with comfort
 
 To use this project, you'll need to:
 
-Clone this project to your computer using the command (git clone https://github.com/Waterfallllllll/AdvancedJsProject.git your_folder)
+Clone this project to your computer using the command (git clone https://github.com/Waterfallllllll/AdvancedJsProject.git)
 Next, download all npm packages. 
 
 ## Usage
