@@ -13,11 +13,19 @@ This project was created for personal practice in utilizing JavaScript and vario
 
 In this project, I utilized modules with ES6 Modules syntax. Modules are necessary to segment JavaScript files for specific tasks. This is essential for ease of editing and readability of the JavaScript code. Otherwise, however, you might find it unpleasant to read and edit a JavaScript file with 20,000 lines or more. I also used babel and core-js polyfills as a module. Now my project can work not only on the latest browser versions but also on older ones.
 
+#### Gulp
+
+The Galp makes our work comfortable. In this case, I configured it to the webpack functionality, as well as to update the page when changing any file and used babel to work with older versions of the browser.
+
+#### Eslint
+
+Eslint allows you to edit js code with comfort
+
 ## Installation
 
 To use this project, you'll need to:
 
-Clone this project to your computer using the command (git clone https://github.com/Waterfallllllll/Food.git your_folder)
+Clone this project to your computer using the command (git clone https://github.com/Waterfallllllll/AdvancedJsProject.git your_folder)
 Next, download all npm packages. 
 
 ## Usage
