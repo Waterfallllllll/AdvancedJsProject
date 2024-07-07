@@ -1,4 +1,4 @@
-# Source
+# AdvancedJsProject
 
 This project was created for personal practice in utilizing JavaScript and various additional technologies. Here you can find implementations of:
 1. Modal windows
